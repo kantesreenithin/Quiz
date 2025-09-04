@@ -1,0 +1,313 @@
+.app {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  padding: 20px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.app h1{
+  border-bottom: 1px solid #ccc;
+}
+
+.home {
+  margin: 150px auto;
+  max-width: 600px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 40px 30px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
+.home h1 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+.home p {
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+.home button {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.home button:hover {
+  background: #0056b3;
+}
+
+.question {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 600px;
+  border: 1px solid #ddd;
+  padding: 20px 25px;
+  border-radius: 15px;
+  /* background: #fafafa; */
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.question h2 {
+  margin-bottom: 15px;
+  font-size: 1.25rem;
+}
+
+.question-timer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto 8px auto;
+  font-size: 1rem;
+}
+.options {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.options > li > button {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.options > li > button:hover {
+  background-color: #f0f0f0;
+  /* border-color: #999; */
+}
+
+/* Selected option highlight */
+.options > li > button.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+button:disabled {
+  background-color: #d1d5db; /* light gray */
+  color: #6b7280; /* dark gray text */
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.timer {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+.alert-timer {
+  color: red;
+  font-weight: bold;
+}
+
+/* results style */
+.results {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 750px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fdfdfd;
+  text-align: left;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.results h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.results ul {
+  list-style: none;
+  padding: 0;
+}
+
+.results li {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f8f8f8;
+  border: 1px solid #eee;
+}
+
+.results li strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.results .correct {
+  color: green;
+}
+
+.results .wrong {
+  color: red;
+}
+
+.results button {
+  background-color: #007bff;
+  color: white;
+  margin-top: 15px;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+  .home {
+    margin: 150px auto;
+    padding: 25px 20px;
+    width: 90%;
+  }
+
+  .home h1 {
+    font-size: 1.5rem;
+  }
+
+  .home p {
+    font-size: 0.95rem;
+  }
+
+  .home button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    width: 100%; /* full width for easy tap */
+  }
+
+  .question {
+    width: 100%;
+    padding: 15px;
+  }
+  .options {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .options > li > button {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  .question h2 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    margin: 350px auto;
+    padding: 20px 15px;
+    width: 95%;
+  }
+
+  .home h1 {
+    font-size: 1.3rem;
+  }
+
+  .home p {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .home button {
+    font-size: 0.95rem;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .app {
+    padding: 10px;
+  }
+  .question {
+    width: 100%;
+    padding: 12px;
+  }
+  .options {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .options > li > button {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+  button {
+    font-size: 13px;
+    padding: 7px 14px;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  .question h2 {
+    font-size: 1rem;
+  }
+}
+
+.progress-bar {
+  width: 90%;
+  max-width: 600px;
+  height: 10px;
+  background: #e5e7eb;
+  border-radius: 5px;
+  margin: 10px auto 20px auto;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #007bff;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.nav-buttons button {
+  min-width: 80px;
+}
