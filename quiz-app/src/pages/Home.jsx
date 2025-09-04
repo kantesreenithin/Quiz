@@ -11,11 +11,11 @@ function Home() {
 
     "Once the timer runs out, you’ll automatically move to the next question.",
 
+    "If previous question time ends you cannot go back to previous question",
+
     "You can change your answer before the timer ends for that question.",
 
     "Click Submit after the last question to see your results.",
-
-    "Your highest score will be saved – try to beat it!",
   ];
   return (
     <div className="home">
