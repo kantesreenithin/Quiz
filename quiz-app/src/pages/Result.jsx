@@ -72,6 +72,7 @@ function Result() {
             /*acces useranswer with index */
           }
           const userAnswer = userAnswers[i];
+          const isCorrect = userAnswer?.isCorrect;
 
           return (
             <li key={i} style={{ marginBottom: "1rem" }}>
@@ -79,6 +80,7 @@ function Result() {
               <br />
               Your answer:{" "}
               <span style={{ color: userAnswer?.isCorrect ? "green" : "red" }}>
+                <span style={{fontSize:"12px"}}>{isCorrect ? "✔️" : "❌"}</span>{" "}
                 {userAnswer ? userAnswer.text : "Not answered"}
               </span>
               <br />

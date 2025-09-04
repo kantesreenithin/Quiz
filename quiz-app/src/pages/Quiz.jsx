@@ -78,7 +78,9 @@ function Quiz() {
   };
   return (
     <div className="app">
-      <h1>Quiz</h1>
+     <h1 class="clean-heading">Test Your Brainpower : The Ultimate GK Quiz!</h1>
+
+
 
       {
         <div>
@@ -111,7 +113,11 @@ function Quiz() {
           {/*Navigation btns */}
           <div className="nav-buttons">
             {currentQuestion > 0 && (
-              <button onClick={navigateToPrevQuestion}>Prev</button>
+              <button onClick={navigateToPrevQuestion}
+              disabled={
+                currentQuestion===0 || timers[currentQuestion-1]===0
+              }
+              >Prev</button>
             )}
 
             {currentQuestion < questions.length - 1 && (
