@@ -5,6 +5,8 @@ function ProgressBar({ currentQuestion, questions }) {
     <div className="progress-bar">
       <div
         className="progress"
+        role="progressbar"
+        aria-label="Quiz Progress"
         style={{
           width: `${((currentQuestion + 1) / questions.length) * 100}%`,
         }}

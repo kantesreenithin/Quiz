@@ -43,16 +43,18 @@ function Result() {
 
   return (
     <div className="results">
-      <h2>Results</h2>
-      {/* show count of correct answers */}
-      <p>
-        You answered {correctAnswers} / {questions.length} correctly
-      </p>
-      {/* highest score */}
-      <p>
-        Highest Score: {highestScore}/{questions.length}
-      </p>
-
+      {/* score summary */}
+      <h2 className="results-title">Results</h2>
+      <div className="score-box">
+        <p>
+          You answered <span className="score-highlight">{correctAnswers}</span>{" "}
+          / {questions.length} correctly
+        </p>
+        <p>
+          Highest Score : <span className="score-highlight">{highestScore}</span>
+          /{questions.length}
+        </p>
+      </div>
       {/*btns for restart and home */}
       <button onClick={handleResult}>Restart Quiz</button>
 
@@ -80,7 +82,9 @@ function Result() {
               <br />
               Your answer:{" "}
               <span style={{ color: userAnswer?.isCorrect ? "green" : "red" }}>
-                <span style={{fontSize:"12px"}}>{isCorrect ? "✔️" : "❌"}</span>{" "}
+                <span style={{ fontSize: "12px" }}>
+                  {isCorrect ? "✔️" : "❌"}
+                </span>{" "}
                 {userAnswer ? userAnswer.text : "Not answered"}
               </span>
               <br />

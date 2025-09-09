@@ -1,4 +1,4 @@
-import { useEffect} from "react";
+import { useEffect } from "react";
 import Question from "../components/Question";
 import ProgressBar from "../components/ProgressBar";
 import { useQuiz } from "../contexts/QuizContext";
@@ -76,11 +76,38 @@ function Quiz() {
   const handleResult = () => {
     navigate("/result");
   };
+
+  //keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "ArrowRight") {
+        if (currentQuestion < questions.length - 1) {
+          navigateToNextQuestion();
+        }
+      } else if (e.key === "ArrowLeft") {
+        if (currentQuestion > 0) {
+          navigateToPrevQuestion();
+        }
+      } else if (e.key === "Enter") {
+        if (currentQuestion === questions.length-1) {
+          handleResult();
+        } else if (userAnswers[currentQuestion]) {
+          navigateToNextQuestion();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [currentQuestion, questions, userAnswers]);
   return (
     <div className="app">
-     <h1 class="clean-heading">Test Your Brainpower : The Ultimate GK Quiz!</h1>
-
-
+      <h1 className="clean-heading">
+        Test Your Brainpower : The Ultimate GK Quiz!
+      </h1>
 
       {
         <div>
@@ -89,7 +116,7 @@ function Quiz() {
             <p>
               Question {currentQuestion + 1} of {questions.length}
             </p>
-            <p className="timer">
+            <p className="timer" aria-live="polite">
               🕔 :{" "}
               <span className={timeLeft < 6 ? "alert-timer" : ""}>
                 {timeLeft}
@@ -113,11 +140,14 @@ function Quiz() {
           {/*Navigation btns */}
           <div className="nav-buttons">
             {currentQuestion > 0 && (
-              <button onClick={navigateToPrevQuestion}
-              disabled={
-                currentQuestion===0 || timers[currentQuestion-1]===0
-              }
-              >Prev</button>
+              <button
+                onClick={navigateToPrevQuestion}
+                disabled={
+                  currentQuestion === 0 || timers[currentQuestion - 1] === 0
+                }
+              >
+                Prev
+              </button>
             )}
 
             {currentQuestion < questions.length - 1 && (

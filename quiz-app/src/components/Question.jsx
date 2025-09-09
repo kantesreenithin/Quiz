@@ -4,12 +4,17 @@ function Question({ question, onAnswerClick, selectedAnswer }) {
       {/*question */}
       <h2>{question.question}</h2>
       {/*question options */}
-      <ul className="options">
+      <ul className="options" role="listbox" aria-label="Answer Choices">
         {question.answerOptions.map((option) => {
           return (
-            <li key={option.text}>
+            <li
+              key={option.text}
+              role="option"
+              aria-selected={selectedAnswer?.text === option.text}
+            >
               <button
                 onClick={() => onAnswerClick(option)}
+                aria-pressed={selectedAnswer?.text === option.text}
                 className={
                   selectedAnswer?.text === option.text ? "selected" : ""
                 }

@@ -20,7 +20,7 @@ function Home() {
   return (
     <div className="home">
       <h1>Welcome to quiz app</h1>
-      <p>Test you General Knowledge and verify with results</p>
+      <p>Learn, play, and test your brainpower.</p>
       {/* Instructions Box */}
       <div className="instructions">
         <h2>📝 Instructions</h2>
