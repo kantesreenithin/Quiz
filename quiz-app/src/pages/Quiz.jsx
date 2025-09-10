@@ -3,8 +3,8 @@ import Question from "../components/Question";
 import ProgressBar from "../components/ProgressBar";
 import { useQuiz } from "../contexts/QuizContext";
 import { useNavigate } from "react-router-dom";
+
 function Quiz() {
-  //Getting all needed items form context
   const {
     userAnswers,
     setUserAnswers,
@@ -16,11 +16,9 @@ function Quiz() {
   } = useQuiz();
 
   const navigate = useNavigate();
-
-  //sepcific timer per question
   const timeLeft = timers[currentQuestion];
 
-  //set timer per question if go to prev then the timer should resume for prevosuly stopped and count down
+  // Timer countdown
   useEffect(() => {
     const timer = setInterval(() => {
       setTimers((prev) => {
@@ -34,14 +32,13 @@ function Quiz() {
     return () => clearInterval(timer);
   }, [currentQuestion, setTimers]);
 
-  // when time becomes zero automatically move to next or if last question then submit
+  // Auto move when time = 0
   useEffect(() => {
     if (timeLeft === 0) {
       handleAutoNext();
     }
   }, [timeLeft]);
 
-  //auto handle for next question
   const handleAutoNext = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
@@ -50,46 +47,29 @@ function Quiz() {
     }
   };
 
-  //get user answers and store it at specific question num index
   const handleAnswer = (answer) => {
     const updatedAnswers = [...userAnswers];
-    // updatedAnswers[currentQuestion] = answer;
     if (updatedAnswers[currentQuestion]?.text === answer.text) {
-      updatedAnswers[currentQuestion] = null; //retracts it clicked again
+      updatedAnswers[currentQuestion] = null;
     } else {
       updatedAnswers[currentQuestion] = answer;
     }
     setUserAnswers(updatedAnswers);
   };
 
-  //navigate to prev question
-  const navigateToPrevQuestion = () => {
-    setCurrentQuestion((prev) => prev - 1);
-  };
+  const navigateToPrevQuestion = () => setCurrentQuestion((prev) => prev - 1);
+  const navigateToNextQuestion = () => setCurrentQuestion((prev) => prev + 1);
+  const handleResult = () => navigate("/result");
 
-  //navigate to next question
-  const navigateToNextQuestion = () => {
-    setCurrentQuestion((prev) => prev + 1);
-  };
-
-  //navigate to result
-  const handleResult = () => {
-    navigate("/result");
-  };
-
-  //keyboard navigation
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "ArrowRight") {
-        if (currentQuestion < questions.length - 1) {
-          navigateToNextQuestion();
-        }
-      } else if (e.key === "ArrowLeft") {
-        if (currentQuestion > 0) {
-          navigateToPrevQuestion();
-        }
+      if (e.key === "ArrowRight" && currentQuestion < questions.length - 1) {
+        navigateToNextQuestion();
+      } else if (e.key === "ArrowLeft" && currentQuestion > 0) {
+        navigateToPrevQuestion();
       } else if (e.key === "Enter") {
-        if (currentQuestion === questions.length-1) {
+        if (currentQuestion === questions.length - 1) {
           handleResult();
         } else if (userAnswers[currentQuestion]) {
           navigateToNextQuestion();
@@ -98,88 +78,83 @@ function Quiz() {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentQuestion, questions, userAnswers]);
+
   return (
-    <div className="app">
-      <h1 className="clean-heading">
-        Test Your Brainpower : The Ultimate GK Quiz!
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-emerald-50 py-10 px-6 sm:px-10 flex flex-col items-center">
+      {/* Title */}
+      <h1 className="font-poppins text-3xl sm:text-4xl font-bold text-teal-700 drop-shadow-md text-center mb-8">
+        🧠 Test Your Brainpower: The Ultimate GK Quiz!
       </h1>
 
-      {
-        <div>
-          {/*question number and timer */}
-          <div className="question-timer">
-            <p>
-              Question {currentQuestion + 1} of {questions.length}
-            </p>
-            <p className="timer" aria-live="polite">
-              🕔 :{" "}
-              <span className={timeLeft < 6 ? "alert-timer" : ""}>
-                {timeLeft}
-              </span>
-            </p>
-          </div>
+      {/* Question Card */}
+      <div className="w-full max-w-4xl bg-white rounded-3xl shadow-lg p-8 sm:p-10 space-y-6">
+        {/* Question Header */}
+        <div className="flex justify-between items-center">
+          <p className="font-poppins text-gray-700 font-semibold">
+            Question {currentQuestion + 1} / {questions.length}
+          </p>
+          <p
+            className={`px-4 py-1 rounded-full font-bold text-sm ${
+              timeLeft < 6
+                ? "bg-rose-100 text-rose-600 animate-pulse"
+                : "bg-teal-100 text-teal-700"
+            }`}
+            aria-live="polite"
+          >
+            ⏳ {timeLeft}s
+          </p>
+        </div>
 
-          {/*progress bar Component*/}
-          <ProgressBar
-            currentQuestion={currentQuestion}
-            questions={questions}
-          />
+        {/* Progress bar */}
+        <ProgressBar currentQuestion={currentQuestion} questions={questions} />
 
-          {/*Question Component */}
-          <Question
-            question={questions[currentQuestion]}
-            onAnswerClick={handleAnswer}
-            selectedAnswer={userAnswers[currentQuestion]}
-          />
+        {/* Question component */}
+        <Question
+          question={questions[currentQuestion]}
+          onAnswerClick={handleAnswer}
+          selectedAnswer={userAnswers[currentQuestion]}
+        />
 
-          {/*Navigation btns */}
-          <div className="nav-buttons">
-            {currentQuestion > 0 && (
-              <button
-                onClick={navigateToPrevQuestion}
-                disabled={
-                  currentQuestion === 0 || timers[currentQuestion - 1] === 0
-                }
-              >
-                Prev
-              </button>
-            )}
-
-            {currentQuestion < questions.length - 1 && (
+        {/* Navigation Buttons */}
+        <div className="flex flex-wrap justify-center gap-4 pt-6">
+          {currentQuestion > 0 && (
+            <button
+              onClick={navigateToPrevQuestion}
+              disabled={timers[currentQuestion - 1] === 0}
+              className="px-6 py-3 rounded-xl font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 transition"
+            >
+               Prev
+            </button>
+          )}
+          {currentQuestion < questions.length - 1 && (
+            <>
               <button
                 onClick={navigateToNextQuestion}
-                disabled={userAnswers[currentQuestion]}
+                className="px-6 py-3 rounded-xl font-semibold bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
               >
-                Skip
+                Skip 
               </button>
-            )}
-
-            {currentQuestion < questions.length - 1 && (
               <button
                 onClick={navigateToNextQuestion}
                 disabled={!userAnswers[currentQuestion]}
+                className="px-6 py-3 rounded-xl font-semibold bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-50 transition"
               >
-                Next
+                Next 
               </button>
-            )}
-
-            {/*submit btn on last question */}
-            {currentQuestion === questions.length - 1 && (
-              <button
-                onClick={handleResult}
-                style={{ background: "#007bff", color: "white" }}
-              >
-                Submit
-              </button>
-            )}
-          </div>
+            </>
+          )}
+          {currentQuestion === questions.length - 1 && (
+            <button
+              onClick={handleResult}
+              className="px-8 py-3 rounded-xl font-semibold bg-emerald-600 text-white hover:bg-emerald-700 transition"
+            >
+              Submit
+            </button>
+          )}
         </div>
-      }
+      </div>
     </div>
   );
 }
