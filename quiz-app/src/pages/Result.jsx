@@ -60,7 +60,7 @@ function Result() {
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6">
               <p className="text-sm opacity-80">Percentage</p>
-              <p className="text-2xl sm:text-3xl font-bold">{scorePercent}%</p>
+              <p className="text-2xl sm:text-3xl font-bold">{scorePercent} %</p>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6">
               <p className="text-sm opacity-80">Highest Score</p>

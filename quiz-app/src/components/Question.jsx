@@ -1,9 +1,9 @@
-function Question({ question, onAnswerClick, selectedAnswer }) {
+function Question({ currentQuestion,question, onAnswerClick, selectedAnswer }) {
   return (
     <div className="bg-white rounded-3xl shadow-xl p-6 sm:p-10 space-y-6">
       {/* Question */}
-      <h2 className="text-xl sm:text-2xl font-bold text-gray-800 text-center">
-        {question.question}
+      <h2 className="font-poppins text-xl sm:text-2xl font-semibold text-gray-800">
+        Q{currentQuestion+1}. {question.question}
       </h2>
 
       {/* Options */}
@@ -20,7 +20,7 @@ function Question({ question, onAnswerClick, selectedAnswer }) {
               <button
                 onClick={() => onAnswerClick(option)}
                 aria-pressed={isSelected}
-                className={`font-poppins w-full flex items-center justify-center px-8 py-5 rounded font-semibold text-lg transition-all duration-300
+                className={`font-poppins w-full flex items-center justify-center px-6 py-5 rounded font-semibold text-lg transition-all duration-300
                   ${
                     isSelected
                       ? "bg-gradient-to-r from-teal-500 to-emerald-500 text-white shadow-xl scale-105"

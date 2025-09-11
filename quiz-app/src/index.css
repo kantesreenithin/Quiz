@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "tailwindcss";
+
+/*
 .app {
   text-align: center;
   font-family: "Roboto", sans-serif;
@@ -10,8 +12,6 @@
 .app h1 {
   border-bottom: 1px solid #ccc;
 }
-
-/* styles.css */
 .home {
   max-width: 700px;
   margin: 50px auto;
@@ -57,7 +57,6 @@
   margin-bottom: 15px;
   font-size: 1.5rem;
   font-family: Arial, Helvetica, sans-serif;
-  /* color: #4caf50; */
 }
 
 .instructions ul {
@@ -112,7 +111,6 @@
   border: 1px solid #ddd;
   padding: 20px 25px;
   border-radius: 15px;
-  /* background: #fafafa; */
   box-sizing: border-box;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -150,13 +148,12 @@
   transition: all 0.2s ease;
 }
 
-/* Hover effect */
+
 .options > li > button:hover {
   background-color: #f0f0f0;
-  /* border-color: #999; */
 }
 
-/* Selected option highlight */
+
 .options > li > button.selected {
   background-color: #007bff;
   color: white;
@@ -178,8 +175,8 @@ button:hover {
 }
 
 button:disabled {
-  background-color: #d1d5db; /* light gray */
-  color: #6b7280; /* dark gray text */
+  background-color: #d1d5db; 
+  color: #6b7280; 
   cursor: not-allowed;
   opacity: 0.7;
 }
@@ -194,7 +191,7 @@ button:disabled {
   font-weight: bold;
 }
 
-/* results style */
+
 .results {
   margin: 20px auto;
   width: 100%;
@@ -266,16 +263,15 @@ button:disabled {
 }
 
 .results p {
-  font-size: 1.125rem; /* Slightly larger for readability */
-  color: #34495e; /* Soft, elegant dark gray */
-  text-align: center; /* Center aligned for clean layout */
-  margin: 8px 0; /* Space between paragraphs */
-  font-weight: 500; /* Medium weight for balance */
-  line-height: 1.5; /* Comfortable spacing */
-  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  font-size: 1.125rem; 
+  color: #34495e; 
+  text-align: center; 
+  margin: 8px 0; 
+  font-weight: 500;
+  line-height: 1.5; 
 }
 
-/* Responsive design */
+
 
 @media (max-width: 768px) {
   .home {
@@ -410,3 +406,6 @@ button:disabled {
 .nav-buttons button {
   min-width: 80px;
 }
+
+
+*/

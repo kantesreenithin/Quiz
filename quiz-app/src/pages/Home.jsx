@@ -10,6 +10,7 @@ function Home() {
     "You will have 30 seconds to answer each question.",
     "Use the Next and Prev buttons to navigate between questions.",
     "Once the timer runs out, you’ll automatically move to the next question.",
+    "You can only go to next question. If any option selected.",
     "If previous question time ends you cannot go back to previous question.",
     "You can change your answer before the timer ends for that question.",
     "Click Submit after the last question to see your results.",
@@ -52,7 +53,7 @@ function Home() {
               </p>
             </div>
             <div className="bg-white rounded-2xl shadow-lg p-5 hover:shadow-xl hover:-translate-y-1 transition">
-              <h3 className="font-poppins text-lg font-semibold text-emerald-700">
+              <h3 className="font-poppins text-lg font-semibold text-gray-700">
                 📝 Multiple Choice
               </h3>
               <p className="font-lato text-gray-600 mt-2 text-sm">

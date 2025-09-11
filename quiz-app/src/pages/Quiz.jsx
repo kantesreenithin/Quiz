@@ -64,12 +64,17 @@ function Quiz() {
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "ArrowRight" && currentQuestion < questions.length - 1) {
-        navigateToNextQuestion();
+      if (e.key === "ArrowRight") {
+        if (
+          userAnswers[currentQuestion] &&
+          currentQuestion < questions.length - 1
+        ) {
+          navigateToNextQuestion();
+        }
       } else if (e.key === "ArrowLeft" && currentQuestion > 0) {
         navigateToPrevQuestion();
       } else if (e.key === "Enter") {
-        if (currentQuestion === questions.length - 1) {
+        if (userAnswers[currentQuestion] && currentQuestion === questions.length - 1) {
           handleResult();
         } else if (userAnswers[currentQuestion]) {
           navigateToNextQuestion();
@@ -84,8 +89,8 @@ function Quiz() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-emerald-50 py-10 px-6 sm:px-10 flex flex-col items-center">
       {/* Title */}
-      <h1 className="font-poppins text-3xl sm:text-4xl font-bold text-teal-700 drop-shadow-md text-center mb-8">
-        🧠 Test Your Brainpower: The Ultimate GK Quiz!
+      <h1 className="font-poppins text-3xl sm:text-4xl font-semibold text-shadow-zinc-700 drop-shadow-md text-center mb-8">
+        🧠 Challenge Your Mind: General Knowledge Quiz
       </h1>
 
       {/* Question Card */}
@@ -112,6 +117,7 @@ function Quiz() {
 
         {/* Question component */}
         <Question
+          currentQuestion={currentQuestion}
           question={questions[currentQuestion]}
           onAnswerClick={handleAnswer}
           selectedAnswer={userAnswers[currentQuestion]}
@@ -123,25 +129,25 @@ function Quiz() {
             <button
               onClick={navigateToPrevQuestion}
               disabled={timers[currentQuestion - 1] === 0}
-              className="px-6 py-3 rounded-xl font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 transition"
+              className="px-6 py-3 rounded-xl font-semibold bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed  transition"
             >
-               Prev
+              Prev
             </button>
           )}
           {currentQuestion < questions.length - 1 && (
             <>
               <button
                 onClick={navigateToNextQuestion}
-                className="px-6 py-3 rounded-xl font-semibold bg-yellow-100 text-yellow-700 hover:bg-yellow-200 transition"
+                className="px-6 py-3 rounded-xl font-semibold bg-yellow-100 text-yellow-700 hover:bg-yellow-200 disabled:cursor-not-allowed  transition"
               >
-                Skip 
+                Skip
               </button>
               <button
                 onClick={navigateToNextQuestion}
                 disabled={!userAnswers[currentQuestion]}
-                className="px-6 py-3 rounded-xl font-semibold bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-50 transition"
+                className="px-6 py-3 rounded-xl font-semibold bg-teal-600 text-white hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed  transition"
               >
-                Next 
+                Next
               </button>
             </>
           )}
